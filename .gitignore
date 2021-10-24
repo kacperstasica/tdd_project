@@ -2,8 +2,6 @@ geckodriver.log
 __pycache__
 *.pyc
 .DS_Store
-*.pyc
-__pycache__
 *.sqlite3
 .env
 node_modules/
