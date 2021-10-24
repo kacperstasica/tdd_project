@@ -49,7 +49,8 @@ class NewVisitorTest(unittest.TestCase):
 
         self.fail('Finish the test!')
 
-
+        # TODO: Cleanup after FT runs
+        # TODO: Support more than one list
 
 
 # checks if it is runned from the command line rather than just imported by another script
