@@ -12,7 +12,7 @@ def send_login_email(request):
     email = request.POST['email']
     token = Token.objects.create(email=email)
     url = request.build_absolute_uri(
-        reverse('login') + '?token=' + str(token.uid)
+        reverse('login') + '?token={uid}'.format(uid=str(token.uid))
     )
     message_body = f'Use this link to log in:\n\n{url}'
     send_mail(
@@ -30,9 +30,7 @@ def send_login_email(request):
 
 
 def login(request):
-    print('login view', file=sys.stderr)
-    uid = request.GET.get('uid')
-    user = auth.authenticate(uid=uid)
-    if user is not None:
+    user = auth.authenticate(uid=request.GET.get('token'))
+    if user:
         auth.login(request, user)
     return redirect('/')

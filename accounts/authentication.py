@@ -1,14 +1,16 @@
+from django.contrib.auth.backends import BaseBackend
+
 from accounts.models import Token, User
 
 
-class PasswordlessAuthenticationBackend:
+class PasswordlessAuthenticationBackend(BaseBackend):
 
-    def authenticate(self, uid):
+    def authenticate(self, request, **kwargs):
         try:
-            token = Token.objects.get(uid=uid)
-            return User.objects.get(email=token.email)
+            my_token = Token.objects.get(uid=kwargs.get('uid'))
+            return User.objects.get(email=my_token.email)
         except User.DoesNotExist:
-            return User.objects.create(email=token.email)
+            return User.objects.create(email=my_token.email)
         except Token.DoesNotExist:
             return None
 
