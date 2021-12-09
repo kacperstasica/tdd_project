@@ -4,6 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+django-environ = "*"
 "psycopg2" = "*"
 Django = "==3.2.*"
 selenium = "*"
