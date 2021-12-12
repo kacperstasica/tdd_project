@@ -22,3 +22,7 @@ class List(models.Model):
 
     def get_absolute_url(self):
         return reverse('view_list', args=[self.pk])
+
+    @property
+    def name(self):
+        return self.item_set.first().text
