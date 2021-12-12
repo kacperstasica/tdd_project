@@ -149,6 +149,7 @@ LOGGING = {
     'root': {
         'handlers': ['console'],
         'level': 'WARNING',
+        'propagate': True,
     },
 }
 
