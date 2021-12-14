@@ -11,7 +11,7 @@ from lists.models import Item, List
 
 from lists.forms import (
     ItemForm, EMPTY_ITEM_ERROR,
-    DUPLICATE_ITEM_ERROR, ExistingListItemForm, NewListForm,
+    DUPLICATE_ITEM_ERROR, ExistingListItemForm,
 )
 from lists.views import new_list
 
