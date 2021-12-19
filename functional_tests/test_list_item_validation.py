@@ -1,3 +1,4 @@
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 from .base import FunctionalTest
@@ -6,7 +7,7 @@ from .base import FunctionalTest
 class ItemValidationTest(FunctionalTest):
 
     def get_error_element(self):
-        return self.browser.find_element_by_css_selector('.has-error')
+        return self.browser.find_element(By.CSS_SELECTOR, '.has-error')
 
     def test_cannot_add_empty_list_item(self):
         # user tries to enter an empty list item
@@ -14,13 +15,15 @@ class ItemValidationTest(FunctionalTest):
         self.get_item_input_box().send_keys(Keys.ENTER)
 
         # browser intercepts the and does not load the list page
-        self.wait_for(lambda: self.browser.find_element_by_css_selector(
+        self.wait_for(lambda: self.browser.find_element(
+            By.CSS_SELECTOR,
             '#id_text:invalid'
         ))
 
         # user starts typing some text for the new item and the error disappears
         self.get_item_input_box().send_keys('Buy milk')
-        self.wait_for(lambda: self.browser.find_element_by_css_selector(
+        self.wait_for(lambda: self.browser.find_element(
+            By.CSS_SELECTOR,
             '#id_text:valid'
         ))
 
@@ -33,13 +36,15 @@ class ItemValidationTest(FunctionalTest):
 
         # Again, the browser will not comply
         self.wait_for_row_in_list_table('1: Buy milk')
-        self.wait_for(lambda: self.browser.find_element_by_css_selector(
+        self.wait_for(lambda: self.browser.find_element(
+            By.CSS_SELECTOR,
             '#id_text:invalid'
         ))
 
         # user can correct it by filling some text in
         self.get_item_input_box().send_keys('Make tea')
-        self.wait_for(lambda: self.browser.find_element_by_css_selector(
+        self.wait_for(lambda: self.browser.find_element(
+            By.CSS_SELECTOR,
             '#id_text:valid'
         ))
         self.get_item_input_box().send_keys(Keys.ENTER)

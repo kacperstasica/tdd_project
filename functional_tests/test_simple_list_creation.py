@@ -1,3 +1,5 @@
+from selenium.webdriver.common.by import By
+
 from .base import FunctionalTest
 
 from selenium import webdriver
@@ -11,7 +13,7 @@ class NewVisitorTest(FunctionalTest):
 
         self.assertIn('To-Do', self.browser.title)
         # self.fail('Finish the test!') - great thing to remember!
-        header_text = self.browser.find_element_by_tag_name('h1').text
+        header_text = self.browser.find_element(By.TAG_NAME, 'h1').text
         self.assertIn('To-Do', header_text)
 
         # entering to-do item
@@ -54,7 +56,7 @@ class NewVisitorTest(FunctionalTest):
 
         # new user visits homepage
         self.browser.get(self.live_server_url)
-        page_text = self.browser.find_element_by_tag_name('body').text
+        page_text = self.browser.find_element(By.TAG_NAME, 'body').text
         self.assertNotIn('Buy peacock feathers', page_text)
         self.assertNotIn('make a fly', page_text)
 
@@ -70,6 +72,6 @@ class NewVisitorTest(FunctionalTest):
         self.assertNotEqual(new_user_list_url, user_list_url)
 
         # there is no trace of first users url
-        page_text = self.browser.find_element_by_tag_name('body').text
+        page_text = self.browser.find_element(By.TAG_NAME, 'body').text
         self.assertNotIn('Buy peacock feathers', page_text)
         self.assertIn('Buy milk', page_text)
