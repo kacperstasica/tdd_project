@@ -56,7 +56,7 @@ class FunctionalTest(StaticLiveServerTestCase):
 
     @wait
     def wait_for_row_in_list_table(self, row_text):
-        table = self.browser.find_element(By.ID, 'id_list_table')
+        table = self.browser.find_element(By.ID, 'id_list-table')
         rows = table.find_elements(By.TAG_NAME, 'tr')
         self.assertIn(row_text, [row.text for row in rows])
 
@@ -64,7 +64,7 @@ class FunctionalTest(StaticLiveServerTestCase):
         return self.browser.find_element(By.ID, 'id_text')
 
     def add_list_item(self, item_text):
-        num_rows = len(self.browser.find_elements(By.CSS_SELECTOR, '#id_list_table tr'))
+        num_rows = len(self.browser.find_elements(By.CSS_SELECTOR, '#id_list-table tr'))
         self.get_item_input_box().send_keys(item_text)
         self.get_item_input_box().send_keys(Keys.ENTER)
         item_number = num_rows + 1
